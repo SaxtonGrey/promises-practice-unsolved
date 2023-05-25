@@ -8,8 +8,10 @@
  *          export const Promise
  */
 
-export const attachTitle = () => {
+export const attachTitle = (arg) => {
   // Your code goes here...
+  const preFix = 'DR. ';
+  return `${preFix}${arg}`;
 };
 
 /**
@@ -22,6 +24,9 @@ export const attachTitle = () => {
 
 export const getPromise = () => {
   // Your code goes here...
+  return Promise.resolve('MANHATTAN')
+    .then(attachTitle)
+    .then(console.log);
 };
 
 // === TEST YOURSELF ===

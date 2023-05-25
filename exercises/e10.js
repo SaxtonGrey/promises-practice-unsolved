@@ -24,7 +24,7 @@ export const promiseArr = [promise1, promise2, promise3, promise4];
  */
 
 // Your code goes here...
-export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
+export const handlePromise1 = Promise.all(promiseArr).catch((e) => e);
 
 /**
  * @task
@@ -41,7 +41,18 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
-
+export function handlePromise2(promiseArr) {
+  // Your code goes here...
+  return Promise.any(promiseArr)
+    .then((values) => {
+      // Return the resolved value of promise3
+      return values;
+    })
+    .catch((reason) => {
+      // Return the rejection reason
+      throw reason;
+    });
+}
 /**
  * @task
  * * Create the handlePromise3 function that follows:
@@ -57,7 +68,9 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
-
+export function handlePromise3(promiseArr) {
+  return Promise.allSettled(promiseArr);
+}
 /**
  * @task
  * Update the filter method callback to filter out any promise that will be settled before promise4
@@ -68,7 +81,9 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
 
 export const newPromiseArr = promiseArr.filter((promise) => {
   // Your code goes here...
-  return promise;
+  return Promise.race([promise, promise4])
+    .then((value) => value === promise4)
+    .catch(() => false);
 });
 
 // Do NOT refactor or update handlePromise4 function, it's all set to work

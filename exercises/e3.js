@@ -14,9 +14,17 @@
  * * getPromise(num) function must be exported
  * Example: export const getPromise(num) => return <Your code of promise>
  */
-export const getPromise = () => {
+export const getPromise = (argument) => {
   // Your code goes here...
+  if (Number.isInteger(argument)) {
+    return new Promise((resolve) => {
+      resolve(argument);
+    });
+  } else {
+    return 0;
+  }
 };
+
 
 /**
  * @task
@@ -31,6 +39,13 @@ export const getPromise = () => {
  */
 export const updateSumValue = () => {
   // Your code goes here...
+  let sum = 2;
+  const promise = getPromise(120);
+  promise.then((value) => {
+    sum += value;
+  })
+  sum += 8;
+  return sum;
 };
 
 // === TEST YOURSELF ===
